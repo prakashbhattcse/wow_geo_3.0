@@ -196,7 +196,29 @@ path.wrongpick{fill:var(--orange);stroke:#fff;stroke-width:.7}
 .az-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1.5px solid var(--rule);font-weight:600;font-size:.95rem;min-height:46px;background:#fff;transition:all .2s ease}
 .az-item.found{background:var(--good-bg);border-color:var(--good);color:var(--ink)}
 .az-item.missing{background:#fafafa;border-style:dashed;color:var(--muted);justify-content:center}
+.az-item.gave-up{background:#fdf2f2;border:1.5px solid #ef4444;color:#dc2626;justify-content:flex-start}
+.az-item.gave-up .name{color:#dc2626;font-weight:700}
+.az-btn.gave-up{background:#fdf2f2;border-color:#f87171;color:#dc2626}
+.az-btn.gave-up .l-badge{color:#dc2626}
+.az-btn.gave-up.active{background:#dc2626;border-color:#b91c1c;color:#fff}
+.az-btn.gave-up.active .l-badge{color:rgba(255,255,255,.9)}
+.gave-up-tag{color:#dc2626;font-weight:700;margin-left:8px}
 .az-item .placeholder{font-family:var(--head);font-weight:700;letter-spacing:2px;color:rgba(0,0,0,.25)}
 .az-item .flag{width:28px;height:20px;flex-shrink:0}
 .az-item .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Type-All Ended Map & Missed Highlights */
+.type-map path.wrongpick, .zoom-map path.wrongpick, .type-map .wrongpick { fill: #EF4444 !important; stroke: #ffffff; stroke-width: 0.6; }
+.type-map path.correct, .zoom-map path.correct { fill: #5DB33A; stroke: #ffffff; stroke-width: 0.6; }
+
+.ended-banner { background: #FFF5F5; border: 1.5px solid #F87171; border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px; }
+.ended-banner p { margin: 0; font-size: 1.05rem; color: var(--ink); line-height: 1.4; }
+.ended-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.missed-list { margin-top: 18px; }
+.missed-list h3 { font-size: 1.1rem; color: #DC2626; margin-bottom: 10px; font-weight: 700; }
+.missed-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.missed-chip { display: flex; align-items: center; gap: 8px; background: #FDF2F2; border: 1px solid #F87171; color: #DC2626; border-radius: 8px; padding: 5px 10px; font-weight: 600; font-size: 0.9rem; }
+.missed-chip .flag { width: 24px; height: 18px; flex-shrink: 0; }
+
+
 

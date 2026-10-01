@@ -37,12 +37,14 @@ export const games = [
   g('capitals', 'world-cities', 'World Cities', 'Big cities that aren\'t capitals. Which country are they in?', 'Pick the country each city belongs to. 10 rounds.', 'quiz', { gen: 'cityToCountry', rounds: 10 }),
   g('capitals', 'capital-countdown', 'Capital Countdown', 'Capitals against a 60-second clock.', 'Answer as many capital questions as you can in 60 seconds.', 'quiz', { gen: 'countryToCapital', timer: 60, rounds: 999, fast: true }),
   // MAPS
-  g('maps', 'world-map-quiz', 'World Map Quiz', 'Pick a continent and click every country we name.', 'Choose a continent, then click the countries as we call them out. 12 rounds.', 'mapclick', { mode: 'country', pool: 'choose', rounds: 12 }),
+  g('maps', 'world-map-quiz', 'World Map Quiz', 'Pick a continent and click every country we name or type all countries on the map.', 'Choose Click Map Quiz or Type All Countries mode, then select a region or play the whole world.', 'mapclick', { mode: 'country', pool: 'choose', rounds: 12 }),
+  g('maps', 'type-all-world-countries', 'Type All World Countries', 'Type all 195 countries of the world and watch the map fill in.', 'Type country names to highlight them green on the map. Giving up highlights all missing countries in red.', 'typeall', { scope: 'all', time: 900, map: true }),
   g('maps', 'continent-connections', 'Continent Connections', 'Connect countries to their continents.', 'Click a country, then the continent it belongs to.', 'match', { kind: 'country-continent', pairs: 6 }),
-  g('maps', 'blank-map-challenge', 'Blank Map Challenge', 'Type countries and watch the blank map fill in.', 'Pick a continent and type every country you can think of in 5 minutes. Each one lights up on the map.', 'typeall', { scope: 'choose', time: 300, map: true }),
+  g('maps', 'blank-map-challenge', 'Blank Map Challenge', 'Type countries and watch the blank map fill in.', 'Pick a continent or the whole world and type every country you can think of. Each one lights up green, missing countries turn red on give up.', 'typeall', { scope: 'choose', time: 300, map: true }),
   g('maps', 'continent-a-z', 'Continent A–Z', 'Name countries starting with given letters in single-clue or all-alphabet modes.', 'Choose All Countries (A–Z) mode to guess all countries for each letter, or Classic 10-round quiz.', 'continentAZ', { gen: 'continentLetter', rounds: 10, input: 'type' }),
   g('maps', 'map-coordinates', 'Map Coordinates', 'Read the latitude and longitude, find the country.', 'We give you the coordinates of a country\'s centre. Pick the right one. 10 rounds.', 'quiz', { gen: 'coords', rounds: 10 }),
   g('maps', 'continental-sprint', 'Continental Sprint', 'Two minutes to name every country in a continent.', 'Pick a continent and type as many of its countries as you can in 2 minutes.', 'typeall', { scope: 'choose', time: 120, map: false }),
+
   // INDIA
   g('india', 'indian-state-map', 'Indian State Map', 'We name a state, you click it on the map of India.', 'Click the state or union territory we name. 12 rounds.', 'mapclick', { mode: 'india', rounds: 12 }),
   g('india', 'india-on-the-map', 'India on the Map', 'A state lights up. Which one is it?', 'Look at the highlighted state and pick its name. 12 rounds.', 'quiz', { gen: 'indiaHighlight', rounds: 12 }),

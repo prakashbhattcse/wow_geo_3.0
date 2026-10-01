@@ -8,11 +8,13 @@ import { cities, landmarks, indiaRegions } from '../../data/extra';
 import { TINY } from '../generators';
 import { sample } from '../../lib/util';
 import { Button } from '../../components/common';
+import TypeAllEngine from './TypeAllEngine';
 
 const W = 960, H = 560;
 
 export default function MapClickEngine({ game }) {
   const cfg = game.config;
+  const [playEngine, setPlayEngine] = useState('click');
   const [phase, setPhase] = useState('intro');
   const [view, setView] = useState(cfg.mode === 'india' ? 'India' : 'World');
   const [features, setFeatures] = useState(null);
@@ -21,6 +23,10 @@ export default function MapClickEngine({ game }) {
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [result, setResult] = useState(null); // { ok, picked, pin, km, pts }
+
+  if (playEngine === 'type') {
+    return <TypeAllEngine game={{ ...game, config: { scope: 'choose', time: 600, map: true } }} />;
+  }
 
   useEffect(() => {
     if (phase !== 'play' || features) return;
@@ -71,12 +77,36 @@ export default function MapClickEngine({ game }) {
   if (phase === 'intro') {
     if (cfg.pool === 'choose') return (
       <GameIntro game={game} onStart={() => start('World')} startLabel="Whole world">
-        <p className="muted">Or pick one continent:</p>
+        <div className="az-mode-selector" style={{ marginBottom: 16 }}>
+          <p className="muted"><strong>Select Mode:</strong></p>
+          <div className="mode-cards">
+            <button
+              type="button"
+              className={`mode-card ${playEngine === 'click' ? 'active' : ''}`}
+              onClick={() => setPlayEngine('click')}
+            >
+              <span className="mode-icon">🎯</span>
+              <span className="mode-title">Click Map Quiz</span>
+              <span className="mode-desc">We name a country, you click it on the map. 12 rounds.</span>
+            </button>
+            <button
+              type="button"
+              className={`mode-card ${playEngine === 'type' ? 'active' : ''}`}
+              onClick={() => setPlayEngine('type')}
+            >
+              <span className="mode-icon">⌨️</span>
+              <span className="mode-title">Type All Countries (Map)</span>
+              <span className="mode-desc">Type country names to highlight them green on the map. Giving up highlights missing countries in red.</span>
+            </button>
+          </div>
+        </div>
+        <p className="muted">Or pick one region/continent:</p>
         <div className="chip-row">{CONTINENTS.map(c => <Button key={c} variant="outline" onClick={() => start(c)}>{c}</Button>)}</div>
       </GameIntro>
     );
     return <GameIntro game={game} onStart={() => start()} />;
   }
+
   if (phase === 'done') {
     const max = cfg.mode === 'point' ? targets.length * 1000 : targets.length;
     return <Results game={game} score={score} onAgain={() => setPhase('intro')} title={`${score.toLocaleString('en-US')} out of ${max.toLocaleString('en-US')}`} line={cfg.mode === 'point' ? 'Up to 1,000 points per pin, zero if you\'re 2,500 km or more away.' : null} />;

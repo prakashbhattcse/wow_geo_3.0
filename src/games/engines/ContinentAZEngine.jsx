@@ -14,6 +14,7 @@ export default function ContinentAZEngine({ game }) {
   const [activeLetter, setActiveLetter] = useState('A');
   const [continent, setContinent] = useState('All');
   const [found, setFound] = useState([]);
+  const [givenUpLetters, setGivenUpLetters] = useState([]);
   const [typed, setTyped] = useState('');
   const [flash, setFlash] = useState(null);
   const [time, setTime] = useState(0);
@@ -59,12 +60,21 @@ export default function ContinentAZEngine({ game }) {
   const totalCount = filteredCountries.length;
   const foundCount = found.length;
 
-  // Check for full victory
+  // Check if all letters are either completed or given up
   useEffect(() => {
-    if (phase === 'play' && totalCount > 0 && foundCount === totalCount) {
+    if (phase !== 'play' || totalCount === 0 || mode !== 'all-az') return;
+    const allResolved = LETTERS.every(l => {
+      const list = countriesByLetter[l] || [];
+      if (list.length === 0) return true;
+      const allFound = list.every(c => found.includes(c.id));
+      const isGivenUp = givenUpLetters.includes(l);
+      return allFound || isGivenUp;
+    });
+
+    if (allResolved) {
       setPhase('done');
     }
-  }, [foundCount, totalCount, phase]);
+  }, [found, givenUpLetters, totalCount, phase, mode, countriesByLetter]);
 
   const start = (selectedMode = mode) => {
     setMode(selectedMode);
@@ -73,6 +83,7 @@ export default function ContinentAZEngine({ game }) {
       return;
     }
     setFound([]);
+    setGivenUpLetters([]);
     setTyped('');
     setTime(0);
     setActiveLetter('A');
@@ -80,7 +91,32 @@ export default function ContinentAZEngine({ game }) {
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
+  const giveUpActiveLetter = () => {
+    if (givenUpLetters.includes(activeLetter)) return;
+    const newGivenUp = [...givenUpLetters, activeLetter];
+    setGivenUpLetters(newGivenUp);
+    setFlash(`Section ${activeLetter} Given Up`);
+    setTimeout(() => setFlash(null), 1500);
+
+    // Auto-advance to the next letter with remaining un-found and un-given-up countries
+    const nextL = LETTERS.find(l => {
+      const list = countriesByLetter[l] || [];
+      if (list.length === 0) return false;
+      const allFound = list.every(c => found.includes(c.id));
+      const isGivenUp = newGivenUp.includes(l);
+      return !allFound && !isGivenUp;
+    });
+
+    if (nextL) {
+      setTimeout(() => {
+        setActiveLetter(nextL);
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }, 300);
+    }
+  };
+
   const onType = e => {
+    if (givenUpLetters.includes(activeLetter)) return;
     const val = e.target.value;
     setTyped(val);
     const id = lookup.get(norm(val));
@@ -99,10 +135,12 @@ export default function ContinentAZEngine({ game }) {
       const updatedFound = [...found, id];
       const currentDone = currentList.every(item => updatedFound.includes(item.id));
       if (currentDone && letter === activeLetter) {
-        // Find next letter with remaining countries
+        // Find next letter with remaining countries that is not done and not given up
         const nextL = LETTERS.find(l => {
           const list = countriesByLetter[l] || [];
-          return list.length > 0 && !list.every(item => updatedFound.includes(item.id));
+          const isDone = list.length > 0 && list.every(item => updatedFound.includes(item.id));
+          const isGivenUp = givenUpLetters.includes(l);
+          return list.length > 0 && !isDone && !isGivenUp;
         });
         if (nextL) {
           setTimeout(() => {
@@ -173,7 +211,7 @@ export default function ContinentAZEngine({ game }) {
       <Results
         game={game}
         score={found.length}
-        onAgain={() => setPhase('intro')}
+        onAgain={() => start(mode)}
         title={`${found.length} of ${totalCount}`}
         line={`All-Alphabet Mode (${continent}), completed in ${fmtTime(time)}.`}
       >
@@ -197,6 +235,7 @@ export default function ContinentAZEngine({ game }) {
   const activeCountries = countriesByLetter[activeLetter] || [];
   const activeFoundCount = activeCountries.filter(c => found.includes(c.id)).length;
   const isActiveComplete = activeCountries.length > 0 && activeFoundCount === activeCountries.length;
+  const isGivenUp = givenUpLetters.includes(activeLetter);
 
   const prevLetterIdx = (LETTERS.indexOf(activeLetter) - 1 + LETTERS.length) % LETTERS.length;
   const nextLetterIdx = (LETTERS.indexOf(activeLetter) + 1) % LETTERS.length;
@@ -219,19 +258,28 @@ export default function ContinentAZEngine({ game }) {
             const list = countriesByLetter[l] || [];
             const fCount = list.filter(c => found.includes(c.id)).length;
             const isDone = list.length > 0 && fCount === list.length;
+            const isLGivenUp = givenUpLetters.includes(l);
             const isActive = l === activeLetter;
             const isEmpty = list.length === 0;
+
+            let btnClass = 'az-btn';
+            if (isActive) btnClass += ' active';
+            if (isDone) btnClass += ' done';
+            else if (isLGivenUp) btnClass += ' gave-up';
+            if (isEmpty) btnClass += ' empty';
 
             return (
               <button
                 key={l}
                 type="button"
-                className={`az-btn ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isEmpty ? 'empty' : ''}`}
+                className={btnClass}
                 onClick={() => { setActiveLetter(l); setTimeout(() => inputRef.current?.focus(), 20); }}
                 disabled={isEmpty}
               >
                 <span className="l-char">{l}</span>
-                <span className="l-badge">{isEmpty ? '•' : isDone ? '✓' : `${fCount}/${list.length}`}</span>
+                <span className="l-badge">
+                  {isEmpty ? '•' : isDone ? '✓' : isLGivenUp ? `✗ ${fCount}/${list.length}` : `${fCount}/${list.length}`}
+                </span>
               </button>
             );
           })}
@@ -261,6 +309,7 @@ export default function ContinentAZEngine({ game }) {
           <p className="az-sub">
             {activeFoundCount} of {activeCountries.length} found for letter {activeLetter}
             {isActiveComplete && <span className="complete-tag"> 🎉 Complete!</span>}
+            {isGivenUp && !isActiveComplete && <span className="gave-up-tag"> ❌ Section Given Up</span>}
           </p>
         </div>
 
@@ -271,26 +320,51 @@ export default function ContinentAZEngine({ game }) {
             ref={inputRef}
             value={typed}
             onChange={onType}
-            placeholder={`Type any country starting with ${activeLetter}...`}
+            placeholder={
+              isGivenUp
+                ? `Section ${activeLetter} given up`
+                : isActiveComplete
+                ? `Letter ${activeLetter} complete!`
+                : `Type any country starting with ${activeLetter}...`
+            }
+            disabled={isGivenUp || isActiveComplete}
             autoComplete="off"
           />
-          <Button variant="outline" onClick={() => setPhase('done')}>Give Up</Button>
+          <Button
+            variant="outline"
+            onClick={giveUpActiveLetter}
+            disabled={isGivenUp || isActiveComplete}
+          >
+            {isGivenUp ? 'Section Given Up' : 'Give Up Section'}
+          </Button>
+          <Button variant="ghost" onClick={() => setPhase('done')}>
+            End Game
+          </Button>
           {flash && <span className="flash" aria-live="polite">{flash}</span>}
         </div>
 
         <div className="az-country-grid">
           {activeCountries.map(c => {
             const isFound = found.includes(c.id);
+            if (isFound) {
+              return (
+                <div key={c.id} className="az-item found">
+                  <Flag id={c.id} />
+                  <span className="name">{c.name}</span>
+                </div>
+              );
+            }
+            if (isGivenUp) {
+              return (
+                <div key={c.id} className="az-item gave-up">
+                  <Flag id={c.id} />
+                  <span className="name">{c.name}</span>
+                </div>
+              );
+            }
             return (
-              <div key={c.id} className={`az-item ${isFound ? 'found' : 'missing'}`}>
-                {isFound ? (
-                  <>
-                    <Flag id={c.id} />
-                    <span className="name">{c.name}</span>
-                  </>
-                ) : (
-                  <span className="placeholder">? ? ?</span>
-                )}
+              <div key={c.id} className="az-item missing">
+                <span className="placeholder">? ? ?</span>
               </div>
             );
           })}
@@ -299,3 +373,4 @@ export default function ContinentAZEngine({ game }) {
     </div>
   );
 }
+
