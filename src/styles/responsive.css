@@ -1,0 +1,39 @@
+@media (max-width:980px){
+  .search{display:none}
+  .games-grid,.learn-grid{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr 1fr}
+  .game-list{grid-template-columns:1fr 1fr}
+  .memory-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:800px){
+  .menu{display:none}
+  .menu.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#fff;padding:8px 20px 16px;border-bottom:1px solid var(--rule);gap:12px}
+  .burger{display:block}
+  .hero-grid,.yt-box,.country-grid,.wg-wrap,.daily-box{grid-template-columns:1fr}
+  .daily-box{padding:24px}
+  .globe-box{margin:10px auto 0}
+  .home-quiz{grid-template-columns:1fr}
+  .home-quiz svg{max-width:150px;margin:0 auto}
+  .yt-box{padding:26px}
+  .cont-cards{grid-template-columns:1fr 1fr}
+  .game-intro,.results,.quiz-play,.map-play,.typeall,.wordgrid{padding:18px}
+  .q-card{padding:18px}
+}
+@media (max-width:560px){
+  .nav-end .btn--primary{display:none}
+    .options,.answers,.game-list{grid-template-columns:1fr}
+  .flag-answers{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr}
+  .globe-box .note{font-size:1.05rem}
+  .notebook{padding-left:52px;padding-right:20px}
+  .memory-grid{grid-template-columns:repeat(4,1fr);gap:6px}
+  .mem{font-size:.7rem}
+  .match-cols{gap:10px}
+  .match-cols button{font-size:.85rem;padding:8px}
+  .country-facts div{grid-template-columns:120px 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.results-h{font-size:1.6rem;margin:26px 0 14px}
+.more-games .heading h2{font-size:1.6rem}
+.hub-cat-head h2{font-size:1.9rem}

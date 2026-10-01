@@ -1,0 +1,7 @@
+/* Global styles, split by area. Order matters: responsive.css last. */
+@import './base.css';
+@import './layout.css';
+@import './home.css';
+@import './pages.css';
+@import './games.css';
+@import './responsive.css';

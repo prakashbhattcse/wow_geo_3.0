@@ -1,0 +1,4 @@
+node_modules
+dist
+dist-server
+scripts/ne_10m_admin_0_countries_ind.geojson

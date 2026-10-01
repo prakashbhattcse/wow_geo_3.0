@@ -1,0 +1,31 @@
+/* header */
+.top{border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:30}
+.nav{display:flex;align-items:center;gap:34px;height:70px}
+.logo{display:flex;gap:10px;align-items:center;text-decoration:none;font-family:var(--head);font-weight:800;font-size:1.3rem;letter-spacing:-.02em}
+.logo-mark{width:34px;height:34px}
+.logo b{color:var(--orange);font-weight:800}
+.menu{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-weight:600;font-size:.95rem}
+.menu a{text-decoration:none}
+.menu a:hover,.menu a.active{color:var(--orange)}
+.nav-end{margin-left:auto;display:flex;gap:14px;align-items:center}
+.search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--rule);border-radius:10px;padding:8px 12px;width:230px}
+.search input{border:0;font:inherit;font-size:.9rem;width:100%;background:none;color:var(--ink)}
+.search input:focus{outline:none}
+.search:focus-within{border-color:var(--ink)}
+.burger{display:none;background:none;border:0;cursor:pointer;color:var(--ink)}
+
+/* footer */
+footer{background:var(--tint);padding:56px 0 26px;font-size:.93rem;border-top:1px solid var(--rule);margin-top:40px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:36px}
+footer h4{font-family:var(--head);font-size:1.05rem;margin:0 0 12px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--orange)}
+footer .about{color:var(--muted);margin:12px 0 16px;max-width:34ch}
+.social{display:flex;gap:14px;font-weight:600;flex-wrap:wrap}
+.sub{display:flex;gap:8px;margin-top:4px}
+.sub input{flex:1;min-width:0;font:inherit;border:1.5px solid var(--rule);border-radius:10px;padding:11px 12px;background:#fff}
+.sub input:focus{outline:none;border-color:var(--ink)}
+.sub .btn--primary{padding:11px 16px}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:44px;padding-top:20px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+.legal nav{display:flex;gap:22px}
