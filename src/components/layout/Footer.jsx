@@ -15,10 +15,10 @@ export default function Footer() {
             <Link to="/" className="logo"><Logo /><span>Wow <b>Geography</b></span></Link>
             <p className="about">Geography games and maps, made in {SITE.city} by {SITE.author}.</p>
             <div className="social">
-              <a href={SITE.youtube} target="_blank" rel="noopener">YouTube</a>
-              <a href={SITE.instagram} target="_blank" rel="noopener">Instagram</a>
-              <a href={SITE.x} target="_blank" rel="noopener">X</a>
-              <a href={SITE.discord} target="_blank" rel="noopener">Discord</a>
+              {SITE.youtube && <a href={SITE.youtube} target="_blank" rel="noopener">YouTube</a>}
+              {SITE.instagram && <a href={SITE.instagram} target="_blank" rel="noopener">Instagram</a>}
+              {SITE.x && <a href={SITE.x} target="_blank" rel="noopener">X</a>}
+              {SITE.discord && <a href={SITE.discord} target="_blank" rel="noopener">Discord</a>}
             </div>
           </div>
           <div>

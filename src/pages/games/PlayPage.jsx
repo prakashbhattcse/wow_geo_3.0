@@ -6,6 +6,8 @@ import { ENGINES } from "../../games/engines";
 import { categoryBySlug, gameBySlug, gamesIn } from "../../data/games";
 import NotFoundPage from "../NotFoundPage";
 
+import GameEducationalContent from "../../components/games/GameEducationalContent";
+
 export default function PlayPage() {
   const { cat, game: slug } = useParams();
   const game = gameBySlug[slug];
@@ -35,6 +37,7 @@ export default function PlayPage() {
       </div>
       <div className="wrap play-area">
         <Engine key={slug} game={game} />
+        <GameEducationalContent game={game} cat={c} />
       </div>
       <div className="wrap more-games">
         <Heading title={`More ${c.name.toLowerCase()} games`} />

@@ -225,35 +225,150 @@ export const facts = [
 
 export const posts = [
   {
-    slug: 'why-nepals-flag-is-not-a-rectangle', title: 'Why Nepal\'s flag isn\'t a rectangle', date: '2026-09-12',
-    summary: 'Every other country uses a rectangle. Nepal uses two stacked triangles, and the reason goes back centuries.',
+    slug: 'why-nepals-flag-is-not-a-rectangle',
+    title: 'Why Nepal\'s flag isn\'t a rectangle',
+    date: '2026-09-12',
+    summary: 'Every other sovereign country uses a rectangular flag. Nepal stands alone with two stacked triangles, rooted in ancient Himalayan tradition and mathematical precision.',
     body: [
-      'Look at a row of flags at any international event and one stands out immediately: Nepal\'s. It is made of two triangular pennants stacked on top of each other, with a white moon in the upper one and a white sun in the lower one, all inside a crimson field with a blue border.',
-      'Triangular pennants were long used by rulers and religious groups across South Asia. The two triangles are often explained as standing for the Himalayas, or for the two main religions of the country, Hinduism and Buddhism. The moon and sun were a wish that the nation would last as long as they do.',
-      'When Nepal adopted its modern constitution in 1962, it did something unusual: it included precise geometric instructions for drawing the flag, step by step, with measurements based on the length of the bottom edge. You can follow them with a ruler and compass and end up with the exact official shape.',
-      'Crimson is Nepal\'s national colour, the colour of the rhododendron, the national flower. The blue border stands for peace.',
-      'Want to see how well you know the rest? Try Guess the Flag or Flag Memory.'
+      'Look at a banner display of all 195 sovereign nations at any international assembly, and one flag catches the eye immediately: Nepal. While 194 nations fly rectangular or square flags, Nepal\'s national flag consists of two stacked triangular pennants. Bordered in deep ocean blue with a crimson field, it displays a stylized white crescent moon in the top triangle and a 12-pointed sun in the bottom.',
+      'The origin of Nepal\'s unique shape dates back over two centuries. Historically, triangular pennants were widely flown across Hindu and Buddhist kingdoms throughout the Himalayan foothills. When neighboring states adopted Western rectangular flags during the 19th and 20th centuries, Nepal retained its historic double-triangle design as a fierce symbol of national sovereignty and cultural independence.',
+      'The symbolism of Nepal\'s flag is layered with geographic and spiritual meaning. The two triangles represent the soaring peaks of the Himalayas, which define the country\'s physical landscape. The crimson red field honors the rhododendron—Nepal\'s national flower—and represents the bravery of its people, while the dark blue border signifies peace and harmony. The celestial sun and moon express the ancestral hope that the nation will endure as long as the heavenly bodies remain in the sky.',
+      'When Nepal adopted its modern democratic constitution in 1962, the government enshrined the exact mathematical construction of the flag into Article 5, Schedule 1. The constitutional text provides a step-by-step geometric drafting algorithm using only a straightedge ruler and a compass. Starting from the bottom baseline, every angle, arc, and proportion is derived geometrically from the width of the base edge.',
+      'Today, Nepal\'s non-rectangular flag is celebrated worldwide by cartographers and vexillologists as a triumph of traditional heraldry. Want to test your visual recognition of world flags? Try our Guess the Flag game or challenge yourself in Flag Master.'
     ]
   },
   {
-    slug: 'bolivia-has-two-capitals', title: 'Bolivia has two capitals. Here\'s why.', date: '2026-08-28',
-    summary: 'Sucre is the capital in the constitution, but the government works from La Paz. Here\'s how that happened.',
+    slug: 'bolivia-has-two-capitals',
+    title: 'Bolivia has two capitals. Here\'s how it happened.',
+    date: '2026-08-28',
+    summary: 'Sucre is the constitutional capital, but La Paz serves as the executive seat of government. Here is the fascinating history behind South America\'s split capital.',
     body: [
-      'Ask which city is the capital of Bolivia and you\'ll get two answers, and both are right. Sucre is the constitutional capital and home of the Supreme Court. La Paz is the seat of government, where the president and parliament work.',
-      'Sucre was the capital after independence in 1825. By the late 1800s La Paz had grown richer from tin mining and trade, and after a short civil war in 1899 the government moved there. Sucre kept its title, and the country has lived with the split ever since.',
-      'At about 3,600 metres, La Paz is the highest seat of government in the world. Visitors often feel the altitude within minutes of landing.',
-      'Bolivia isn\'t alone. South Africa spreads its government across three cities: Pretoria, Cape Town and Bloemfontein. In our capitals games we accept the constitutional capital, so for Bolivia that is Sucre.'
+      'Ask a group of trivia enthusiasts to name the capital of Bolivia, and you are bound to start a lively debate. Half will answer La Paz, while the rest will insist on Sucre. In reality, both answers are correct—Bolivia is one of a handful of sovereign nations that spreads its capital functions across multiple cities.',
+      'Sucre, located in the southern highlands at an elevation of 2,810 metres, is Bolivia\'s constitutional capital. Founded by Spanish conquistadors in 1538 as La Plata, Sucre was designated the sole capital of Bolivia when the country gained independence in 1825. Named after independence leader Antonio José de Sucre, the city remains the official judicial capital of the nation and the seat of the Supreme Court of Justice.',
+      'So how did La Paz become the de facto executive capital? The shift occurred during the late 19th century. Following a boom in tin mining around the Andes, La Paz grew rapidly into Bolivia\'s economic and commercial engine. Tensions between southern silver elites in Sucre and northern tin tycoons in La Paz culminated in the Bolivian Civil War of 1899. After a decisive political victory, the executive presidency and the national congress were relocated to La Paz.',
+      'Sitting in a dramatic Andean canyon at an altitude of over 3,600 metres above sea level, La Paz holds the title of the highest administrative seat of government in the world. Visitors arriving by air at El Alto International Airport (4,061 m) often experience immediate altitude lightheadedness. To navigate its steep mountain slopes, La Paz built Mi Teleférico, the world\'s largest and highest urban cable car transit network.',
+      'Bolivia is not alone in dividing capital responsibilities. South Africa features three distinct capitals: Pretoria (executive), Cape Town (legislative), and Bloemfontein (judicial). Similarly, the Netherlands lists Amsterdam as its constitutional capital while parliament sits in The Hague. Test your knowledge of world capitals in our Guess the Capital quiz!'
     ]
   },
   {
-    slug: 'how-to-get-better-at-flags', title: 'How to get better at flags in a week', date: '2026-08-10',
-    summary: 'Five habits that took us from guessing to getting most flags right, without flashcards.',
+    slug: 'how-to-get-better-at-flags',
+    title: 'How to master world flags in a week without memorization',
+    date: '2026-08-10',
+    summary: 'Five practical cognitive strategies that turn confusing flag colors into instant visual intuition.',
     body: [
-      'Group flags by pattern, not by region. Learn all the horizontal tricolours together, then all the Nordic crosses, then the Pan-African red, yellow and green. Your brain remembers contrasts better than lists.',
-      'Learn the near twins on purpose. Chad and Romania, Indonesia and Monaco, Ireland and Ivory Coast. Once you know the one detail that separates each pair, you stop losing points on them.',
-      'Draw them. Seriously. Trying to draw a flag from memory shows you exactly what you don\'t know, which is why we keep doing it on the YouTube channel.',
-      'Play short sessions. Ten minutes a day of Guess the Flag beats one long session a week.',
-      'Finally, attach one fact to each flag. The maple leaf is easy. Knowing that the wheel on India\'s flag has 24 spokes makes it stick for good.'
+      'Memorizing 195 national flags line-by-line can feel overwhelming. However, top vexillology competitors and geography quiz masters do not memorize individual flashcards—they use visual pattern classification and structural grouping to decode flags instantly.',
+      'First, group flags by structural pattern rather than geographic continent. Learn all horizontal tricolors together (e.g., Germany, Netherlands, Russia), then vertical tricolors (e.g., France, Italy, Nigeria), followed by Nordic crosses (e.g., Sweden, Norway, Denmark, Finland). Your visual cortex processes spatial contrasts much faster than regional lists.',
+      'Second, study "look-alike" twin flags intentionally. The secret to scoring 100% on flag quizzes is isolating the single distinguishing detail between near-identical pairs: Chad and Romania (Romania uses a slightly lighter shade of indigo blue), Monaco and Indonesia (Monaco has a wider 4:5 aspect ratio), and Ireland vs. Ivory Coast (Ireland places green at the hoist, while Ivory Coast places orange at the hoist).',
+      'Third, understand regional color symbolism. Pan-African flags (inspired by Ethiopia) heavily feature red, yellow, and green. Pan-Arab flags incorporate red, black, white, and green. Slavic nations frequently use white, blue, and red horizontal bars derived from the historic Pan-Slavic tricolor.',
+      'Fourth, practice active retrieval in short daily bursts. Five 10-minute sessions of our Flag Speed Run game across a week produce far stronger long-term memory retention than a single two-hour cram session. Test your skills today on Guess the Flag!'
+    ]
+  },
+  {
+    slug: 'the-geography-of-enclaves-and-exclaves',
+    title: 'The wild geography of enclaves and exclaves',
+    date: '2026-07-22',
+    summary: 'Explore the strange borders of Baarle-Nassau, Kaliningrad, and Cooch Behar, where territories sit entirely inside other nations.',
+    body: [
+      'Cartography is full of straight lines and natural river borders, but some international boundaries look like a bowl of spilled spaghetti. Welcome to the world of enclaves and exclaves—geographical pockets where national sovereignty is isolated inside foreign land.',
+      'An enclave is a country or territory completely surrounded by the territory of another single state. There are three sovereign enclave nations on Earth: Vatican City and San Marino (both surrounded entirely by Italy), and the Kingdom of Lesotho (surrounded entirely by South Africa).',
+      'An exclave, on the other hand, is a portion of a country geographically separated from the main mainland by foreign territory. A famous modern example is Kaliningrad, a Russian oblast situated on the Baltic Sea, separated from the rest of Russia by Lithuania and Poland.',
+      'The most complex border puzzle on Earth exists in the town of Baarle, straddling the Netherlands and Belgium. The town contains 22 Belgian enclaves inside the Netherlands, and 7 Dutch counter-enclaves inside the Belgian territory! International border lines cut directly through outdoor cafes, front doors, and living rooms, marked on sidewalks by metal studs. A house\'s official nationality is determined by which side of the border its front door sits on.',
+      'Until a historic border treaty in 2015, the India-Bangladesh border in Cooch Behar contained 162 enclaves, including the world\'s only third-order counter-enclave: a piece of India inside a piece of Bangladesh inside a piece of India inside Bangladesh! Exploring these cartographic anomalies highlights how human history shapes the map. Test your border knowledge in Border Chain Reaction!'
+    ]
+  },
+  {
+    slug: '10-twin-flags-and-how-to-tell-them-apart',
+    title: '10 twin flags and how to tell them apart',
+    date: '2026-07-05',
+    summary: 'Never mix up Chad vs. Romania or Monaco vs. Indonesia again with these sharp visual identifier tricks.',
+    body: [
+      'Few things are more frustrating in a competitive geography quiz than losing a streak because two national flags look virtually identical. Fortunately, almost every twin flag pair has a subtle heraldic difference once you know where to look.',
+      '1. Chad vs. Romania: Both feature vertical stripes of blue, yellow, and red. The difference? Chad uses an unrefined dark indigo blue, whereas Romania uses a slightly brighter cobalt blue.',
+      '2. Monaco vs. Indonesia: Both fly a simple horizontal red-over-white flag. Indonesia\'s flag is wider with a 2:3 aspect ratio, whereas Monaco\'s flag uses a squarer 4:5 ratio.',
+      '3. Ireland vs. Ivory Coast: Both feature green, white, and orange vertical stripes. Ireland places green next to the flagpole (hoist side), while Ivory Coast places orange at the hoist.',
+      '4. New Zealand vs. Australia: Both feature the British Union Jack on a dark blue field with the Southern Cross constellation. Australia uses six white 7-pointed stars, whereas New Zealand uses four red 5-pointed stars outlined in white.',
+      '5. Mali vs. Guinea: Both feature vertical tricolors of red, yellow, and green. Mali starts with green at the hoist (Green-Yellow-Red), while Guinea flips the order starting with red (Red-Yellow-Green).',
+      'Want to put these visual identification tricks into practice? Challenge yourself in Twin Flags!'
+    ]
+  },
+  {
+    slug: 'landlocked-countries-navigating-life-without-coastlines',
+    title: 'Life without coastlines: Navigating 44 landlocked nations',
+    date: '2026-06-18',
+    summary: 'From Bolivia to Uzbekistan, how 44 nations build economies, river trade routes, and navies without ocean access.',
+    body: [
+      'Coastlines offer direct access to ocean shipping lanes, global trade, fishing, and offshore energy. Yet 44 sovereign nations across the globe have no ocean coastline whatsoever—they are landlocked.',
+      'South America has two landlocked nations: Bolivia and Paraguay. Africa holds the highest concentration of landlocked states with 16, including Ethiopia, Niger, and Chad. Europe contains 14 landlocked states, including Switzerland, Austria, and Hungary.',
+      'Being landlocked presents major economic challenges. Transit costs for imports and exports are significantly higher because goods must cross international borders via trucks or rail to reach sea ports. To mitigate this, landlocked countries frequently negotiate duty-free corridor treaties with coastal neighbors.',
+      'Two countries on Earth take landlocked status a step further: they are double-landlocked. This means they are landlocked countries surrounded entirely by other landlocked countries! The world\'s only two double-landlocked states are Liechtenstein in Central Europe (surrounded by Switzerland and Austria) and Uzbekistan in Central Asia (surrounded by Kazakhstan, Kyrgyzstan, Tajikistan, Afghanistan, and Turkmenistan).',
+      'Test your knowledge of coastal and landlocked nations in our Landlocked or Not? quiz game!'
+    ]
+  },
+  {
+    slug: 'why-africa-touches-all-four-hemispheres',
+    title: 'Why Africa touches all four hemispheres',
+    date: '2026-05-30',
+    summary: 'The unique planetary geography of the African continent spanning Northern, Southern, Eastern, and Western Hemispheres.',
+    body: [
+      'Open a world atlas and examine the position of the seven continents relative to the major coordinate lines of Earth. While Asia sits in the Northern and Eastern Hemispheres and North America sits in the Northern and Western Hemispheres, Africa holds a truly unique distinction: it is the only continent that extends into all four geographic hemispheres.',
+      'The Equator (0° latitude) cuts directly across middle Africa, passing through Gabon, Republic of the Congo, Democratic Republic of the Congo, Uganda, Kenya, and Somalia. This divides the continent into the Northern Hemisphere and Southern Hemisphere.',
+      'Simultaneously, the Prime Meridian (0° longitude) cuts through western Africa, passing through Algeria, Mali, Burkina Faso, and Ghana. This divides the continent into the Eastern Hemisphere and Western Hemisphere.',
+      'Because of this central global placement, Africa experiences an incredible range of biomes: from the Mediterranean coast in the north, across the vast hyper-arid Sahara Desert, through lush equatorial tropical rainforests in the Congo Basin, down to the Namib Desert and temperate Mediterranean climate around Cape Town.',
+      'Off the coast of Ghana in the Gulf of Guinea sits the intersection of 0° latitude and 0° longitude. Known as "Null Island", this geographic point is marked by a weather buoy anchored in ocean waters over 4,000 metres deep. Explore the map of Africa in Countries by Continent!'
+    ]
+  },
+  {
+    slug: 'microstates-of-europe-tiny-nations-with-huge-histories',
+    title: 'Microstates of Europe: Tiny nations with huge histories',
+    date: '2026-05-12',
+    summary: 'Inside Vatican City, Monaco, San Marino, Liechtenstein, and Andorra—Europe\'s smallest sovereign states.',
+    body: [
+      'Europe is home to five sovereign microstates—nations with extremely small land areas and populations that have preserved independence for centuries through diplomacy, geography, and historic treaties.',
+      '1. Vatican City (0.49 km²): The smallest independent state in the world by both area and population. Enclaved within Rome, it serves as the spiritual headquarters of the Roman Catholic Church and home to St. Peter\'s Basilica.',
+      '2. Monaco (2.02 km²): Located on the French Riviera, Monaco is the second-smallest independent country in the world and the most densely populated. Famous for the Monte Carlo Casino, Grand Prix, and luxury harbor.',
+      '3. San Marino (61 km²): Enclaved by Italy, San Marino claims to be the oldest surviving sovereign republic in the world, founded in 301 AD by Saint Marinus.',
+      '4. Liechtenstein (160 km²): Nestled in the Alps between Switzerland and Austria, this double-landlocked principality is famous for high-tech manufacturing, banking, and alpine skiing.',
+      '5. Andorra (468 km²): High in the Pyrenees mountains between France and Spain, Andorra is a co-principality jointly ruled by the Bishop of Urgell in Spain and the President of France.',
+      'Test your ability to spot small nations on world maps in Impossible Geography!'
+    ]
+  },
+  {
+    slug: 'how-map-projections-distort-reality',
+    title: 'How map projections distort reality: Mercator vs. True Size',
+    date: '2026-04-25',
+    summary: 'Why flat maps stretch Greenland to the size of Africa, and how 3D spherical geometry challenges cartographers.',
+    body: [
+      'It is mathematically impossible to flatten the surface of a three-dimensional sphere onto a two-dimensional flat sheet of paper or computer screen without distorting shape, area, distance, or direction. Every flat world map you have ever looked at is a compromise.',
+      'The most famous map projection is the Mercator projection, created by Flemish cartographer Gerardus Mercator in 1569. Designed specifically for nautical navigation, the Mercator projection preserves true compass bearings—making sailing trajectories straight lines. However, to achieve this, it dramatically inflates the size of objects as they get closer to the poles.',
+      'On a standard Mercator map, Greenland appears to be the same size as the entire continent of Africa. In reality, Africa is 30.3 million km², making it 14 times larger than Greenland (2.16 million km²)! Similarly, Alaska appears larger than Brazil on Mercator maps, when Brazil is actually more than five times larger than Alaska.',
+      'To solve these area distortions, modern cartographers and digital platforms often use equal-area projections like the Gall-Peters projection or compromise projections like the Natural Earth projection (which we use in our interactive map games). Natural Earth balances shape and area distortion to create visually harmonious world maps.',
+      'Want to test your visual sense of land area? Play Bigger or Smaller to compare real country sizes!'
+    ]
+  },
+  {
+    slug: 'the-15-tricky-capitals-everyone-gets-wrong',
+    title: 'The 15 tricky capitals everyone gets wrong in geography',
+    date: '2026-04-02',
+    summary: 'Why Sydney, Istanbul, Toronto, and Rio de Janeiro are NOT capital cities, and the real capitals you need to know.',
+    body: [
+      'When learning geography, the most common trap is assuming that a country\'s largest, most famous, or economically dominant city is its capital. Governments frequently establish administrative capitals in planned or smaller cities to balance regional power.',
+      'Here are 15 of the most frequently missed capitals:',
+      '1. Australia: Canberra (not Sydney or Melbourne)',
+      '2. Canada: Ottawa (not Toronto or Montreal)',
+      '3. Brazil: Brasília (not Rio de Janeiro or São Paulo)',
+      '4. Turkey: Ankara (not Istanbul)',
+      '5. Switzerland: Bern (de facto, not Zurich or Geneva)',
+      '6. Myanmar: Naypyidaw (not Yangon)',
+      '7. Vietnam: Hanoi (not Ho Chi Minh City)',
+      '8. United States: Washington, D.C. (not New York City)',
+      '9. India: New Delhi (not Mumbai)',
+      '10. South Africa: Pretoria / Cape Town / Bloemfontein (not Johannesburg)',
+      '11. Pakistan: Islamabad (not Karachi)',
+      '12. Morocco: Rabat (not Casablanca or Marrakesh)',
+      '13. Nigeria: Abuja (not Lagos)',
+      '14. New Zealand: Wellington (not Auckland)',
+      '15. United Arab Emirates: Abu Dhabi (not Dubai)',
+      'Master these tricky cities today in our Guess the Capital and Expert Capitals games!'
     ]
   }
 ];
