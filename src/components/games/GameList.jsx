@@ -5,7 +5,17 @@ import { gamePath } from '../../data/games';
 export default function GameList({ games }) {
   return (
     <ul className="game-list">
-      {games.map(g => <li key={g.slug}><Card to={gamePath(g)} title={g.name} text={g.desc} /></li>)}
+      {games.map(g => (
+        <li key={g.slug}>
+          <Card
+            to={gamePath(g)}
+            title={g.name}
+            text={g.desc}
+            icon={g.icon || '🌍'}
+          />
+        </li>
+      ))}
     </ul>
   );
 }
+

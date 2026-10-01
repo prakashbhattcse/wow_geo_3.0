@@ -123,7 +123,10 @@ export default function TypeAllEngine({ game }) {
 
   return (
     <div className="typeall">
-      <Hud items={[['Found', `${found.length}/${pool.length}`], ['Time left', fmtTime(time)], ['Region', regionLabel]]} />
+      <Hud
+        items={[['Found', `${found.length}/${pool.length}`], ['Time left', fmtTime(time)], ['Region', regionLabel]]}
+        action={!isEnded && <Button variant="outline" onClick={() => setPhase('ended')}>Give Up</Button>}
+      />
       {target && <div className="hop-target"><Flag id={target.id} /><p>Name every country that borders <strong>{target.name}</strong>.</p></div>}
       
       {isEnded && (
@@ -151,11 +154,9 @@ export default function TypeAllEngine({ game }) {
           placeholder={isEnded ? 'Game ended – view map below' : isIndia ? 'Type a state or union territory…' : 'Type a country name…'}
           autoComplete="off"
         />
-        <Button variant="outline" onClick={() => setPhase('ended')} disabled={isEnded}>
-          {isEnded ? 'Game Ended' : 'Give Up'}
-        </Button>
         <span className="flash" aria-live="polite">{flash && `✓ ${flash}`}</span>
       </div>
+
 
       {cfg.map && (mapPaths ? (
         <ZoomMap width={W} height={H} label="Interactive world map filling as you type" className={isIndia ? 'india' : ''}>

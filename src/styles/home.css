@@ -29,9 +29,16 @@
 .flagstrip .flag{width:100%;height:100%;object-fit:cover}
 .monu{display:grid;place-items:center;height:100%;width:100%;font-family:var(--hand);font-size:1.25rem;line-height:1.05;text-align:center;background:#FFF4D6;color:#7A5A12;padding:8px}
 .map.mini{padding:6px}
-.cat-strip{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px}
-.cat-strip a{display:flex;gap:8px;align-items:center;text-decoration:none;font-weight:600;border:1.5px solid var(--rule);border-radius:999px;padding:7px 14px;font-size:.93rem}
-.cat-strip a:hover{border-color:var(--ink)}
+.cat-strip { list-style: none; padding: 0; margin: 20px 0 28px; display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
+.cat-strip li { display: inline-flex; }
+.cat-chip { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; color: var(--ink); background: #ffffff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 8px 16px; font-size: 0.95rem; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; white-space: nowrap; }
+.cat-chip .chip-icon { font-size: 1.15rem; transition: transform 0.2s ease; display: inline-block; }
+.cat-chip:hover { border-color: var(--ink); background: #ffffff; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); color: var(--ink); }
+.cat-chip:hover .chip-icon { transform: scale(1.25); }
+.cat-chip.cat-exclusive { background: linear-gradient(135deg, #fff7ed, #fff1f2); border-color: #f97316; color: #c2410c; font-weight: 700; }
+.cat-chip.cat-exclusive:hover { border-color: #ea580c; box-shadow: 0 6px 18px rgba(249, 115, 22, 0.2); }
+.cat-chip.cat-bonus { background: linear-gradient(135deg, #eff6ff, #f0fdf4); border-color: #3b82f6; color: #1d4ed8; font-weight: 700; }
+.cat-chip.cat-bonus:hover { border-color: #2563eb; box-shadow: 0 6px 18px rgba(59, 130, 246, 0.2); }
 
 /* learn block */
 .learn{padding:60px 0}

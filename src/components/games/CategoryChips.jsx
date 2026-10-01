@@ -5,7 +5,14 @@ import { categories } from '../../data/games';
 export default function CategoryChips() {
   return (
     <ul className="cat-strip">
-      {categories.map(c => <li key={c.slug}><Link to={`/games/${c.slug}`}><span aria-hidden="true">{c.icon}</span>{c.name}</Link></li>)}
+      {categories.map(c => (
+        <li key={c.slug}>
+          <Link to={`/games/${c.slug}`} className={`cat-chip cat-${c.slug}`}>
+            <span className="chip-icon" aria-hidden="true">{c.icon}</span>
+            <span className="chip-text">{c.name}</span>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }

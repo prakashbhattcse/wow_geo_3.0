@@ -135,7 +135,20 @@ export default function QuizEngine({ game }) {
 
   return (
     <div className="quiz-play">
-      <Hud items={hud} />
+      <Hud
+        items={hud}
+        action={
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            {answered && !cfg.fast && (
+              <Button ref={nextBtn} variant="primary" size="sm" onClick={next} autoFocus>
+                {index + 1 >= cfg.rounds || lives === 0 ? 'See results' : 'Next question →'}
+              </Button>
+            )}
+            <Button variant="outline" size="sm" onClick={finish}>End game</Button>
+          </div>
+        }
+      />
+
       {progress !== null && <div className="progress" aria-hidden="true"><span style={{ width: `${progress * 100}%` }} /></div>}
       <div key={index} className={'q-card' + (answered ? (wasRight ? ' is-right' : ' is-wrong') : '')}>
         <h2 className="q-prompt">{q.prompt}</h2>
@@ -176,17 +189,17 @@ export default function QuizEngine({ game }) {
                 {!wasRight && q.answerText && <>The answer was <strong>{q.answerText}</strong>. </>}
                 {q.explain}
               </p>
-              {!cfg.fast && (
+              {q.link && (
                 <div className="fb-actions">
-                  <Button ref={nextBtn} onClick={next}>{index + 1 >= cfg.rounds || lives === 0 ? 'See results' : 'Next question'}</Button>
-                  {q.link && <Button variant="text" to={`/learn/countries/${q.link.slug}`} target="_blank" rel="noopener">About {q.link.name}</Button>}
+                  <Button variant="text" to={`/learn/countries/${q.link.slug}`} target="_blank" rel="noopener">About {q.link.name}</Button>
                 </div>
               )}
             </>
           )}
         </div>
       </div>
-      <Button variant="outline" className="quit" onClick={finish}>End game</Button>
     </div>
   );
+
+
 }

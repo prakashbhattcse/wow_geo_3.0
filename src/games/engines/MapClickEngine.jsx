@@ -123,7 +123,20 @@ export default function MapClickEngine({ game }) {
 
   return (
     <div className="map-play">
-      <Hud items={[['Round', `${i + 1}/${targets.length}`], ['Score', score.toLocaleString('en-US')]]} />
+      <Hud
+        items={[['Round', `${i + 1}/${targets.length}`], ['Score', score.toLocaleString('en-US')]]}
+        action={
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            {result && (
+              <Button variant="primary" size="sm" onClick={next} autoFocus>
+                {i + 1 >= targets.length ? 'See results' : 'Next →'}
+              </Button>
+            )}
+            <Button variant="outline" size="sm" onClick={() => setPhase('done')}>End game</Button>
+          </div>
+        }
+      />
+
       <div className="map-prompt">
         <p>{cfg.mode === 'point' ? 'Where is' : 'Click on'} <strong>{target.name}</strong>{target.sub ? <span className="muted"> ({target.sub})</span> : null}?</p>
         <div aria-live="polite">
@@ -131,8 +144,8 @@ export default function MapClickEngine({ game }) {
             ? <p className={result.pts > 500 ? 'good' : 'bad'}>{result.km.toLocaleString('en-US')} km away, +{result.pts} points.</p>
             : <p className={result.ok ? 'good' : 'bad'}>{result.ok ? 'Correct.' : `Not quite, that was ${paths.find(p => p.id === result.picked)?.name || 'somewhere else'}. ${target.name} is shown in green.`}</p>)}
         </div>
-        {result && <Button onClick={next} autoFocus>{i + 1 >= targets.length ? 'See results' : 'Next'}</Button>}
       </div>
+
       {!features ? <div className="vis-loading" style={{ height: 400 }}>Loading map…</div> : (
         <ZoomMap width={W} height={H} label="Clickable map" onBackgroundClick={pickPoint} className={cfg.mode === 'point' ? 'crosshair' : ''}>
           {(guard, k) => (
@@ -149,7 +162,7 @@ export default function MapClickEngine({ game }) {
           )}
         </ZoomMap>
       )}
-      <Button variant="outline" className="quit" onClick={() => setPhase('done')}>End game</Button>
     </div>
   );
+
 }

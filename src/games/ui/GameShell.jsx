@@ -69,4 +69,50 @@ export function Results({ game, title, line, onAgain, children, score, lowerIsBe
   );
 }
 
-export const Hud = ({ items }) => <div className="hud">{items.filter(Boolean).map(([k, v]) => <span key={k}><small>{k}</small><b>{v}</b></span>)}</div>;
+export const Hud = ({ items = [], action, score, maxScore, onGiveUp, onNext }) => {
+  const normItems = (items || []).filter(Boolean).map((item, i) => {
+    if (Array.isArray(item)) {
+      return { k: item[0], v: item[1] };
+    }
+    if (item && typeof item === 'object') {
+      return { k: item.label || item.k || item.key || `stat-${i}`, v: item.val || item.v || item.value };
+    }
+    return { k: `stat-${i}`, v: String(item) };
+  });
+
+  const allItems = [...normItems];
+  if (score !== undefined && score !== null && !allItems.some(it => it.k === 'Score')) {
+    allItems.unshift({ k: 'Score', v: maxScore ? `${score}/${maxScore}` : score });
+  }
+
+  const hasCustomAction = Boolean(action || onGiveUp || onNext);
+
+  return (
+    <div className="hud">
+      <div className="hud-items">
+        {allItems.map(({ k, v }) => (
+          <span key={k}>
+            <small>{k}</small>
+            <b>{v}</b>
+          </span>
+        ))}
+      </div>
+      {hasCustomAction && (
+        <div className="hud-action" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          {onNext && (
+            <Button variant="primary" size="sm" onClick={onNext}>
+              Next question →
+            </Button>
+          )}
+          {onGiveUp && (
+            <Button variant="outline" size="sm" onClick={onGiveUp}>
+              End Game
+            </Button>
+          )}
+          {action}
+        </div>
+      )}
+    </div>
+  );
+};
+

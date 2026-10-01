@@ -33,7 +33,7 @@ function makeGrid(size, count) {
 
 export default function WordGridEngine({ game }) {
   const { size, words } = game.config;
-  const [phase, setPhase] = useState('intro');
+  const [phase, setPhase] = useState('intro'); // 'intro', 'play', 'ended', 'summary'
   const [data, setData] = useState(null);
   const [found, setFound] = useState([]);
   const [first, setFirst] = useState(null);
@@ -41,9 +41,10 @@ export default function WordGridEngine({ game }) {
 
   const start = () => { setData(makeGrid(size, words)); setFound([]); setFirst(null); setSecs(0); setPhase('play'); };
   useEffect(() => { if (phase !== 'play') return; const t = setInterval(() => setSecs(s => s + 1), 1000); return () => clearInterval(t); }, [phase]);
-  useEffect(() => { if (data && found.length === data.placed.length && phase === 'play') setTimeout(() => setPhase('done'), 500); }, [found]); // eslint-disable-line
+  useEffect(() => { if (data && found.length === data.placed.length && phase === 'play') setTimeout(() => setPhase('ended'), 500); }, [found]); // eslint-disable-line
 
   const click = (r, c) => {
+    if (phase !== 'play') return;
     if (!first) { setFirst([r, c]); return; }
     const [r0, c0] = first; setFirst(null);
     const dr = Math.sign(r - r0), dc = Math.sign(c - c0), len = Math.max(Math.abs(r - r0), Math.abs(c - c0)) + 1;
@@ -55,25 +56,101 @@ export default function WordGridEngine({ game }) {
   };
 
   if (phase === 'intro') return <GameIntro game={game} onStart={start} />;
-  if (phase === 'done') {
-    const all = found.length === data.placed.length;
-    const score = all ? Math.max(0, 1000 - secs * 3) : found.length * 50;
-    return <Results game={game} score={score} onAgain={start} title={all ? `Found them all in ${fmtTime(secs)}` : `${found.length} of ${data.placed.length} found`} line={all ? `${score} points. Faster is better.` : `Still hidden: ${data.placed.filter(p => !found.includes(p.word)).map(p => p.word[0] + p.word.slice(1).toLowerCase()).join(', ')}.`} />;
+
+  const all = data && found.length === data.placed.length;
+  const score = all ? Math.max(0, 1000 - secs * 3) : found.length * 50;
+
+  if (phase === 'summary') {
+    return (
+      <Results game={game} score={score} onAgain={start} title={all ? `Found them all in ${fmtTime(secs)}` : `${found.length} of ${data.placed.length} found`} line={all ? `${score} points. Faster is better.` : `Score: ${score} points.`}>
+        <div style={{ margin: '14px 0' }}>
+          <Button variant="outline" onClick={() => setPhase('ended')}>← Back to Word Grid View</Button>
+        </div>
+        {!all && (
+          <details className="missed" open>
+            <summary>The {data.placed.length - found.length} countries you missed</summary>
+            <ul className="flag-list">
+              {data.placed.filter(p => !found.includes(p.word)).map(p => (
+                <li key={p.word} style={{ color: '#DC2626', fontWeight: 700 }}>
+                  {p.word[0] + p.word.slice(1).toLowerCase()}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </Results>
+    );
   }
+
+  const isEnded = phase === 'ended';
   const foundCells = new Set(data.placed.filter(p => found.includes(p.word)).flatMap(p => p.cells));
+  const missedCells = isEnded ? new Set(data.placed.filter(p => !found.includes(p.word)).flatMap(p => p.cells)) : new Set();
+  const missedWords = isEnded ? data.placed.filter(p => !found.includes(p.word)) : [];
+
   return (
     <div className="wordgrid">
-      <Hud items={[['Found', `${found.length}/${data.placed.length}`], ['Time', fmtTime(secs)]]} />
-      <p className="muted">{first ? 'Now click the last letter of the word.' : 'Click the first letter of a country.'}</p>
+      <Hud
+        items={[['Found', `${found.length}/${data.placed.length}`], ['Time', fmtTime(secs)]]}
+        action={!isEnded && <Button variant="outline" onClick={() => setPhase('ended')}>Give Up</Button>}
+      />
+      
+      {isEnded && (
+        <div className="ended-banner">
+          <p>
+            <strong>Game Ended!</strong> You found <strong>{found.length}</strong> of <strong>{data.placed.length}</strong> countries.
+            {missedWords.length > 0 && <span> The <strong>{missedWords.length}</strong> missed words are highlighted in <strong style={{ color: '#EF4444' }}>RED</strong> in the grid below!</span>}
+          </p>
+          <div className="ended-actions">
+            <Button onClick={start}>Play Again</Button>
+            <Button variant="outline" onClick={() => setPhase('summary')}>View Score Details</Button>
+          </div>
+        </div>
+      )}
+
+      <p className="muted">{isEnded ? 'Game ended – see revealed words in red below.' : first ? 'Now click the last letter of the word.' : 'Click the first letter of a country.'}</p>
+      
       <div className="wg-wrap">
         <div className="wg" style={{ gridTemplateColumns: `repeat(${size}, 1fr)` }}>
-          {data.grid.map((row, r) => row.map((ch, c) => (
-            <button key={r + '-' + c} className={(foundCells.has(`${r},${c}`) ? 'f ' : '') + (first && first[0] === r && first[1] === c ? 's' : '')} onClick={() => click(r, c)} aria-label={`Row ${r + 1}, column ${c + 1}: ${ch}`}>{ch}</button>
-          )))}
+          {data.grid.map((row, r) => row.map((ch, c) => {
+            const cellKey = `${r},${c}`;
+            const isF = foundCells.has(cellKey);
+            const isM = missedCells.has(cellKey) && !isF;
+            const isS = first && first[0] === r && first[1] === c;
+            let cls = '';
+            if (isF) cls = 'f';
+            else if (isM) cls = 'missed-cell';
+            if (isS) cls += ' s';
+            return (
+              <button
+                key={cellKey}
+                className={cls}
+                onClick={() => click(r, c)}
+                disabled={isEnded}
+                aria-label={`Row ${r + 1}, column ${c + 1}: ${ch}`}
+              >
+                {ch}
+              </button>
+            );
+          }))}
         </div>
-        <ul className="wg-words">{data.placed.map(p => <li key={p.word} className={found.includes(p.word) ? 'got' : ''}>{p.word[0] + p.word.slice(1).toLowerCase()}</li>)}</ul>
-        <Button variant="outline" onClick={() => setPhase('done')}>Give up</Button>
+        
+        <div className="wg-side" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <ul className="wg-words">
+            {data.placed.map(p => {
+              const isGot = found.includes(p.word);
+              const isMissed = isEnded && !isGot;
+              return (
+                <li key={p.word} className={isGot ? 'got' : isMissed ? 'missed-word' : ''}>
+                  {p.word[0] + p.word.slice(1).toLowerCase()}
+                  {isMissed && <span className="missed-tag"> (Missed)</span>}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );
+
 }
+
