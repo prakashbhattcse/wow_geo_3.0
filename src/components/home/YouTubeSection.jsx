@@ -1,27 +1,90 @@
-import { Button } from '../common';
-import { SITE } from '../../config';
+import { Button } from "../common";
+import SeriesArt from "./SeriesArt";
+import { channel, youtubeSeries } from "../../data/youtube";
+import { SITE } from "../../config";
 
-// Hand-drawn style flags (the wobble comes from the #sketchy SVG filter in index.html)
-const SKETCHES = [
-  ['India, 9/10', <><rect x="5" y="5" width="140" height="90" fill="#fff" /><rect x="5" y="5" width="140" height="30" fill="#FF9933" /><rect x="5" y="65" width="140" height="30" fill="#138808" /><circle cx="75" cy="50" r="12" fill="none" stroke="#000080" strokeWidth="2.5" /><rect x="5" y="5" width="140" height="90" fill="none" stroke="#172434" strokeWidth="2.5" /></>],
-  ['Bangladesh, nailed it', <><rect x="5" y="5" width="140" height="90" fill="#006A4E" stroke="#172434" strokeWidth="2.5" /><circle cx="66" cy="50" r="24" fill="#F42A41" /></>],
-  ['USA, about 43 stars short', <><rect x="5" y="5" width="140" height="90" fill="#fff" stroke="#172434" strokeWidth="2.5" /><path d="M5 5h140v15H5zM5 35h140v15H5zM5 65h140v15H5z" fill="#B22234" /><rect x="5" y="5" width="60" height="45" fill="#3C3B6E" /><g fill="#fff">{[[18, 16], [34, 16], [50, 16], [26, 28], [42, 28], [18, 40], [50, 40]].map(([x, y]) => <circle key={x + '-' + y} cx={x} cy={y} r="2" />)}</g></>],
-  ['Japan, easy mode', <><rect x="5" y="5" width="140" height="90" fill="#fff" stroke="#172434" strokeWidth="2.5" /><circle cx="75" cy="50" r="20" fill="#BC002D" /></>]
-];
+// The host's sticky note: a doodled avatar with initials and a short hello
+function HostNote() {
+  const initial = channel.host[0];
+  return (
+    <aside className="yt-host">
+      <svg
+        className="yt-avatar"
+        viewBox="0 0 80 80"
+        style={{ filter: "url(#sketchy)" }}
+        aria-hidden="true"
+      >
+        <circle
+          cx="40"
+          cy="40"
+          r="36"
+          fill="#FFD84D"
+          stroke="#172434"
+          strokeWidth="2.5"
+        />
+        <text
+          x="40"
+          y="52"
+          textAnchor="middle"
+          fontFamily="Caveat, cursive"
+          fontWeight="700"
+          fontSize="38"
+          fill="#172434"
+        >
+          {initial}
+        </text>
+      </svg>
+      <div>
+        <p className="yt-hello hand">{channel.hello}</p>
+        <p className="yt-intro">{channel.intro}</p>
+        <ul className="yt-tags">
+          <li>🎙️ {channel.language}</li>
+          <li>📍 {SITE.city}</li>
+          {channel.subscribers && <li>❤️ {channel.subscribers}</li>}
+        </ul>
+      </div>
+    </aside>
+  );
+}
 
+// Shows every kind of video on the channel. Text lives in src/data/youtube.js.
 export default function YouTubeSection() {
   return (
-    <section className="yt">
+    <section className="yt" id="youtube">
       <div className="wrap">
         <div className="yt-box">
-          <div>
-            <h2>We also draw flags badly on YouTube</h2>
-            <p>On the WoW Geography channel we try to draw flags from memory, rank countries by strange things and explain why maps look the way they do.</p>
-            <Button href={SITE.youtube}>Watch on YouTube</Button>
+          <div className="yt-top">
+            <div>
+              <h2>Thoda geography, thoda sarcasm, poora mazaa</h2>
+              <p className="yt-lead">
+                On the WoW Geography channel we draw flags from memory, dig up
+                facts you didn't ask for, put countries head to head and explain
+                the basics nobody taught us properly.
+              </p>
+              <Button href={SITE.youtube}>Watch on YouTube</Button>
+            </div>
+            <HostNote />
           </div>
-          <div className="sketches" aria-hidden="true">
-            {SKETCHES.map(([cap, art]) => <figure key={cap}><svg viewBox="0 0 150 100" style={{ filter: 'url(#sketchy)' }}>{art}</svg><figcaption>{cap}</figcaption></figure>)}
-          </div>
+          <ul className="yt-series">
+            {youtubeSeries.map((s, i) => (
+              <li key={s.id} style={{ "--tilt": `${i % 2 ? 1 : -1}deg` }}>
+                <a
+                  href={s.playlist || SITE.youtube}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <SeriesArt type={s.art} />
+                  <strong>{s.title}</strong>
+                  <span>{s.blurb}</span>
+                  {s.note && <q className="yt-note hand">{s.note}</q>}
+                  <em>Watch the series</em>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="yt-signoff hand">
+            — {channel.host}. {channel.signoff}
+          </p>
         </div>
       </div>
     </section>

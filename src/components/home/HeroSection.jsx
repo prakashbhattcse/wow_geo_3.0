@@ -1,43 +1,96 @@
-import art from '../../data/art.json';
+import { Suspense, lazy, useState } from 'react';
 import { Button } from '../common';
 import { games } from '../../data/games';
 
-function Globe() {
-  const { everest: [ex, ey], tokyo: [tx, ty] } = art.pts;
-  return (
-    <div className="globe-box" aria-hidden="true">
-      <svg viewBox="0 0 500 500">
-        <circle cx="250" cy="250" r="235" fill="#D3E8F6" stroke="#172434" strokeWidth="2" />
-        <path d={art.globeGrat} fill="none" stroke="#fff" strokeWidth="1.2" />
-        <path d={art.globeLand} fill="#AFD394" stroke="#5E8F45" strokeWidth="1" />
-        <path d={art.globeIndia} fill="#FFD84D" stroke="#5E8F45" strokeWidth="1" />
-        <g fill="#EE5A24"><circle cx={ex} cy={ey} r="5" /><circle cx={tx} cy={ty} r="4" /></g>
-        <g fill="none" stroke="#172434" strokeWidth="2" strokeLinecap="round">
-          <path d={`M${ex - 4} ${ey - 9} Q ${ex - 10} ${ey - 50} 185 152`} />
-          <path d={`M${tx + 4} ${ty - 8} Q ${tx + 30} ${ty - 50} 452 62`} />
-        </g>
-      </svg>
-      <span className="note o" style={{ left: '29%', top: '15%' }}>Everest,<br />8,849 m</span>
-      <span className="note" style={{ right: '-2%', top: 0, textAlign: 'right' }}>Greater Tokyo:<br />37 million people</span>
-      <span className="note" style={{ left: '-4%', bottom: '-5%' }}>India is the yellow one.<br />Bet you knew that.</span>
-    </div>
-  );
-}
+const Globe3D = lazy(() => import('./Globe3D'));
+
+const GEO_FACTS = [
+  { icon: '💡', title: 'Did You Know?', text: '90% of humanity lives in the Northern Hemisphere.' },
+  { icon: '🏔️', title: 'Earth Trivia', text: 'Mount Everest grows ~4mm taller every single year!' },
+  { icon: '🌍', title: 'Geography Fact', text: 'Africa is the only continent spanning all 4 hemispheres.' },
+  { icon: '🌊', title: 'World Fact', text: 'Canada holds over 60% of all natural lakes on Earth!' },
+  { icon: '⏱️', title: 'Time Trivia', text: 'Russia spans 11 time zones from west to east.' },
+];
 
 export default function HeroSection() {
+  const [factIndex, setFactIndex] = useState(0);
+
+  const nextFact = () => {
+    setFactIndex((prev) => (prev + 1) % GEO_FACTS.length);
+  };
+
+  const currentFact = GEO_FACTS[factIndex];
+
   return (
     <section className="hero">
       <div className="wrap hero-grid">
         <div>
           <h1>How much of the world do you really know?</h1>
-          <p className="lead">Guess countries from their shape, name the flag before the timer runs out, and pick up a few facts you'll want to tell someone at dinner.</p>
+          <p className="lead">
+            Guess countries from their shape, name the flag before the timer runs out, and pick up a few facts you'll want to tell someone at dinner.
+          </p>
           <div className="hero-actions">
             <Button to="/games">Play a game</Button>
             <Button variant="text" to="/maps">Or just look at maps</Button>
           </div>
-          <p className="small-note"><strong>{games.length} games covering all 195 countries.</strong> Free to play, and you don't need an account.</p>
+          <p className="small-note">
+            <strong>{games.length} games covering all 195 countries.</strong> Free to play, and you don't need an account.
+          </p>
         </div>
-        <Globe />
+
+        {/* Globe with surrounding handwritten notes & interactive fact badges */}
+        <div className="globe-wrap">
+
+          {/* ── TOP-LEFT: Website Feature Badge ── */}
+          <div className="gnote gnote--tl gbadge">
+            <span className="gbadge-icon">🎯</span>
+            <div className="gbadge-text">
+              <strong>195 Countries</strong>
+              <span>Interactive Maps & Quizzes</span>
+            </div>
+          </div>
+
+          {/* ── TOP-RIGHT: Tokyo handwritten note + arrow ── */}
+          <div className="gnote gnote--tr hand">
+            <span className="gnote-title">🏙️ Greater Tokyo</span>
+            <span className="gnote-sub">37.4M people · World's Largest</span>
+            <svg className="gnote-line" viewBox="0 0 70 48" fill="none" aria-hidden="true">
+              <path d="M4 6 Q 20 30 62 44" stroke="#172434" strokeWidth="1.6" strokeLinecap="round"/>
+              <path d="M56 42 L62 44 L57 38" stroke="#172434" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+          </div>
+
+          {/* ── The 3D globe canvas ── */}
+          <div className="globe-box">
+            <Suspense fallback={<div className="globe-placeholder" aria-hidden="true" />}>
+              <Globe3D size={440} />
+            </Suspense>
+            {/* ── DRAG HINT ── */}
+            {/* <span className="globe-hint">Drag globe to rotate · Auto-spins when idle</span> */}
+          </div>
+
+          {/* ── BOTTOM-LEFT: Everest handwritten note ── */}
+          <div className="gnote gnote--bl hand">
+            <span className="gnote-title">🏔️ Mt. Everest: 8,849m</span>
+            <span className="gnote-sub">Grows ~4mm taller every year!</span>
+          </div>
+
+          {/* ── BOTTOM-RIGHT: Interactive Fact Card ── */}
+          <button 
+            type="button"
+            className="gnote gnote--br gfact-card"
+            onClick={nextFact}
+            title="Click to see another geography fact!"
+          >
+            <div className="gfact-head">
+              <span className="gfact-icon">{currentFact.icon}</span>
+              <strong>{currentFact.title}</strong>
+              <span className="gfact-tap">Next ↻</span>
+            </div>
+            <p className="gfact-text">{currentFact.text}</p>
+          </button>
+
+        </div>
       </div>
     </section>
   );
