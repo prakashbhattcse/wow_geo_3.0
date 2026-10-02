@@ -94,11 +94,15 @@ export default function QuizEngine({ game }) {
     const t = setTimeout(() => setQTime(x => x - 1), 1000);
     return () => clearTimeout(t);
   }); // eslint-disable-line
-  // auto-advance in fast modes, focus Next otherwise
+  // auto-advance after every answer – fast mode is quicker, normal mode gives
+  // enough time to read the feedback before moving on automatically.
   useEffect(() => {
     if (!answered || phase !== 'play') return;
-    if (cfg.fast) { const t = setTimeout(next, wasRight ? 450 : 1100); return () => clearTimeout(t); }
-    nextBtn.current?.focus();
+    const delay = cfg.fast
+      ? (wasRight ? 450 : 1100)   // fast mode: original timings
+      : (wasRight ? 900 : 1800);  // normal mode: readable pause then advance
+    const t = setTimeout(next, delay);
+    return () => clearTimeout(t);
   }, [answered]); // eslint-disable-line
   useEffect(() => { if (phase === 'play' && isTyped && !answered) inputRef.current?.focus(); }, [q, phase]); // eslint-disable-line
   // keyboard 1-4
@@ -139,9 +143,9 @@ export default function QuizEngine({ game }) {
         items={hud}
         action={
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-            {answered && !cfg.fast && (
-              <Button ref={nextBtn} variant="primary" size="sm" onClick={next} autoFocus>
-                {index + 1 >= cfg.rounds || lives === 0 ? 'See results' : 'Next question →'}
+            {answered && (
+              <Button ref={nextBtn} variant="primary" size="sm" onClick={next}>
+                {index + 1 >= cfg.rounds || lives === 0 ? 'See results' : 'Next →'}
               </Button>
             )}
             <Button variant="outline" size="sm" onClick={finish}>End game</Button>

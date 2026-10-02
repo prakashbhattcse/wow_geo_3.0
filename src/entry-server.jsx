@@ -15,7 +15,7 @@ export function render(url) {
 // Every URL that should exist as a real HTML file
 export function routes() {
   return [
-    '/', '/games', '/learn', '/learn/countries', '/learn/capitals', '/learn/flags', '/learn/india', '/maps', '/blog', '/about', '/contact', '/privacy-policy', '/terms', '/search',
+    '/', '/games', '/learn', '/learn/countries', '/learn/capitals', '/learn/flags', '/learn/india', '/maps', '/spin', '/blog', '/about', '/contact', '/privacy-policy', '/terms', '/search',
     ...categories.map(c => `/games/${c.slug}`),
     ...games.map(gamePath),
     ...countries.map(c => `/learn/countries/${c.slug}`),

@@ -19,6 +19,7 @@ import ContactPage from './pages/info/ContactPage';
 import PrivacyPage from './pages/info/PrivacyPage';
 import TermsPage from './pages/info/TermsPage';
 import SearchPage from './pages/info/SearchPage';
+import SpinWheelPage from './pages/SpinWheelPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="learn/india" element={<IndiaPage />} />
         <Route path="maps" element={<MapsPage />} />
         <Route path="maps/:continent" element={<ContinentPage />} />
+        <Route path="spin" element={<SpinWheelPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog/:slug" element={<PostPage />} />
         <Route path="about" element={<AboutPage />} />

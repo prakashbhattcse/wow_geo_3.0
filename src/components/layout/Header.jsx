@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Logo, Button } from '../common';
 
-const NAV = [['/', 'Home'], ['/games', 'Games'], ['/learn', 'Learn'], ['/maps', 'Maps'], ['/blog', 'Blog'], ['/about', 'About']];
+const NAV = [['/', 'Home'], ['/games', 'Games'], ['/learn', 'Learn'], ['/maps', 'Maps'], ['/spin', 'Spin Wheel 🎡'], ['/blog', 'Blog'], ['/about', 'About']];
 
 export default function Header() {
   const [open, setOpen] = useState(false);

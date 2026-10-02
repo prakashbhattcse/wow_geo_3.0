@@ -28,6 +28,13 @@
   .yt-series {
     grid-template-columns: 1fr 1fr;
   }
+  .world-float--note,
+  .world-float--note2 {
+    display: none;
+  }
+  .world-float--card {
+    width: 220px;
+  }
 }
 @media (max-width: 800px) {
   .menu {
@@ -100,6 +107,10 @@
   .globe-wrap {
     padding: 20px 0 20px;
   }
+  /* continent map: touch screens can't hover, the chips under the map do the job */
+  .world-float {
+    display: none;
+  }
 }
 @media (max-width: 560px) {
   .nav-end .btn--primary {
@@ -114,9 +125,13 @@
   .flag-answers {
     grid-template-columns: 1fr 1fr;
   }
-  .foot {
+  /* .foot {
     grid-template-columns: 1fr;
+  } */
+  .foot {
+    grid-template-columns: minmax(0, 1fr);
   }
+
   .yt-series {
     grid-template-columns: 1fr;
   }

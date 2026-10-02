@@ -1,0 +1,339 @@
+﻿/* ═════════════ Spin the Wheel page (pages/SpinWheelPage.jsx) ═════════════ */
+.spin-page {
+  padding-bottom: 80px;
+}
+
+/* ── filter chips (same pill style as the rest of the site) ── */
+.spin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 28px;
+}
+.spin-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 8px 6px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, background 0.15s;
+}
+.spin-filter small {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--tint);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.spin-filter:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.spin-filter.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.spin-filter.is-active small {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+/* ── two-column layout: wheel | result + info ── */
+.spin-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 28px;
+  align-items: start;
+}
+.spin-main {
+  background: var(--tint);
+  border-radius: 20px;
+  padding: 32px 24px 26px;
+}
+
+/* ── the wheel ── */
+.wheel {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.wheel-box {
+  width: 100%;
+  min-width: 0;
+  max-width: 460px;
+  display: flex;
+  justify-content: center;
+}
+.wheel-stage {
+  position: relative;
+  transition: transform 0.25s ease;
+}
+.wheel-stage:not(.is-spinning):hover {
+  transform: scale(1.01);
+}
+.wheel-canvas {
+  display: block;
+  cursor: grab;
+  touch-action: none;
+  border-radius: 50%;
+}
+.wheel-canvas:active {
+  cursor: grabbing;
+}
+.wheel-canvas:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+.wheel-stage.is-spinning .wheel-canvas {
+  cursor: progress;
+}
+.wheel-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.wheel-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.wheel-spin-btn {
+  min-width: 200px;
+}
+.wheel-spin-btn:disabled {
+  animation: spin-breathe 1s ease-in-out infinite alternate;
+}
+@keyframes spin-breathe {
+  from { opacity: 0.85; }
+  to { opacity: 0.55; }
+}
+.wheel-sound {
+  padding: 10px 14px;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.wheel-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+/* ── side column ── */
+.spin-side {
+  display: grid;
+  gap: 16px;
+}
+
+/* result card */
+.spin-result {
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-top: 6px solid var(--orange);
+  border-radius: 16px;
+  padding: 18px 20px 18px;
+  box-shadow: 0 12px 30px rgba(23, 36, 52, 0.08);
+  animation: result-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.spin-result.is-empty {
+  border-top-color: var(--yellow);
+  animation: none;
+}
+.spin-result.is-empty p {
+  margin: 6px 0 0;
+}
+@keyframes result-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+.spin-result-kicker {
+  font-size: 1.35rem;
+  color: var(--orange);
+  margin: 0 0 8px;
+  line-height: 1;
+}
+.spin-result-head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.spin-result-head .flag {
+  width: 84px;
+  height: 63px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  animation: flag-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+@keyframes flag-pop {
+  0% { transform: scale(0.5) rotate(-8deg); opacity: 0; }
+  70% { transform: scale(1.08) rotate(2deg); }
+  100% { transform: none; opacity: 1; }
+}
+.spin-result-head h2 {
+  font-size: 1.8rem;
+  line-height: 1.05;
+}
+.spin-result-head p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+}
+.spin-facts {
+  margin: 0 0 16px;
+  display: grid;
+}
+.spin-facts div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--rule);
+  font-size: 0.92rem;
+}
+.spin-facts dt {
+  font-weight: 700;
+}
+.spin-facts dd {
+  margin: 0;
+  color: var(--muted);
+}
+.spin-result-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* info panels */
+.spin-panel {
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.spin-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.spin-panel-head p,
+.spin-panel-title {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.spin-panel-title {
+  margin-bottom: 10px;
+}
+.spin-panel-head strong {
+  color: var(--ink);
+}
+.spin-panel .btn--sm.btn--outline {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.spin-pool {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 168px;
+  overflow-y: auto;
+}
+.spin-pool li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--tint);
+  border-radius: 7px;
+  padding: 4px 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.spin-pool li.is-hit {
+  background: var(--yellow);
+  transform: scale(1.05);
+}
+.spin-pool .flag {
+  width: 20px;
+  height: 15px;
+}
+.spin-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.spin-history .flag {
+  width: 44px;
+  height: 33px;
+  border-radius: 4px;
+  transition: transform 0.15s;
+}
+.spin-history li:first-child .flag {
+  animation: flag-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.spin-history a:hover .flag {
+  transform: translateY(-2px) rotate(-3deg);
+}
+
+/* ── responsive ── */
+@media (max-width: 980px) {
+  .spin-layout {
+    grid-template-columns: minmax(0, 1fr); /* minmax stops the wheel forcing the column wider than the screen */
+  }
+  .spin-side {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  .spin-side > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 560px) {
+  .spin-main {
+    padding: 22px 12px 20px;
+    border-radius: 16px;
+  }
+  .spin-side {
+    grid-template-columns: 1fr;
+  }
+  .spin-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-right: -20px;
+    scrollbar-width: none;
+  }
+  .spin-filter {
+    flex-shrink: 0;
+  }
+  .wheel-spin-btn {
+    min-width: 0;
+    flex: 1;
+  }
+  .wheel-controls {
+    width: 100%;
+  }
+}

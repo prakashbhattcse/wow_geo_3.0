@@ -506,21 +506,28 @@
   color: var(--orange);
 }
 
-/* continent map */
+/* continent map (components/home/ContinentsSection.jsx + common/ContinentMap.jsx) */
 .world {
   background: var(--tint);
   padding: 64px 0;
 }
 .world-head {
-  margin-bottom: 26px;
+  margin-bottom: 10px;
+}
+
+/* big map with things floating in the oceans */
+.world-stage {
+  position: relative;
 }
 .map a path {
-  transition: filter 0.15s;
+  transition:
+    filter 0.2s,
+    opacity 0.2s;
   cursor: pointer;
 }
 .map a:hover path,
 .map a:focus path {
-  filter: brightness(0.88);
+  filter: brightness(0.92);
 }
 .map a:focus {
   outline: none;
@@ -535,6 +542,169 @@
   stroke-width: 4px;
   stroke-linejoin: round;
   pointer-events: none;
+  transition: opacity 0.2s;
+}
+.map.has-active a path,
+.map.has-active text {
+  opacity: 0.4;
+}
+.map.has-active a.is-active path {
+  opacity: 1;
+  filter: drop-shadow(0 6px 10px rgba(23, 36, 52, 0.25));
+}
+.map.has-active text.is-active {
+  opacity: 1;
+  font-size: 17px;
+}
+
+.world-float {
+  position: absolute;
+  z-index: 2;
+}
+/* North Pacific, below North America */
+.world-float--card {
+  left: 0;
+  bottom: 4%;
+  width: 250px;
+}
+/* Indian Ocean, between Africa and Australia */
+.world-float--note {
+  left: 55%;
+  bottom: 2%;
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: var(--orange);
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+/* empty space to the right of the heading */
+.world-float--note2 {
+  right: 3%;
+  top: -120px;
+  text-align: right;
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--ink);
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+/* South Pacific, bottom right */
+.world-float--compass {
+  right: 0;
+  bottom: 2%;
+  pointer-events: none;
+}
+.world-compass {
+  width: 70px;
+  height: 70px;
+}
+
+/* the floating peek card */
+.peek-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-top: 6px solid var(--c, var(--yellow));
+  border-radius: 14px;
+  padding: 14px 16px 12px;
+  box-shadow: 0 12px 30px rgba(23, 36, 52, 0.12);
+  animation: peek-in 0.2s ease;
+}
+@keyframes peek-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.peek-kicker {
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  color: var(--orange);
+  margin: 0;
+  line-height: 1;
+}
+.peek-empty {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.peek-card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 4px 0 0;
+}
+.peek-count {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.peek-count strong {
+  color: var(--ink);
+}
+.peek-flags {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.peek-flags .flag {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+.peek-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* continent chips under the map */
+.cont-chips {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.cont-chips a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: 999px;
+  padding: 7px 8px 7px 14px;
+  transition:
+    border-color 0.15s,
+    transform 0.15s;
+}
+.cont-chips a:hover,
+.cont-chips a.is-active {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.cont-chips i {
+  width: 11px;
+  height: 11px;
+  border-radius: 4px;
+}
+.cont-chips small {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--tint);
+  border-radius: 999px;
+  padding: 2px 8px;
 }
 
 /* youtube (components/home/YouTubeSection.jsx) */
