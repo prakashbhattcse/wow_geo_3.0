@@ -8,7 +8,7 @@ import { norm } from '../../lib/util';
 
 export default function SearchPage() {
   const q = new URLSearchParams(useLocation().search).get('q') || '';
-  useSeo({ title: q ? `Search: ${q}` : 'Search', description: 'Search games and countries.' });
+  useSeo({ title: q ? `Search: ${q}` : 'Search', description: 'Search games and countries.', noindex: true });
   const n = norm(q);
   const gs = n ? games.filter(g => norm(g.name + g.desc).includes(n)) : [];
   const cs = n ? countries.filter(c => [c.name, c.capital, ...c.alt].some(x => norm(x).includes(n))) : [];

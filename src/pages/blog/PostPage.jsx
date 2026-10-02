@@ -13,7 +13,7 @@ export default function PostPage() {
   return (
     <>
       <PageHeader crumbs={[['/blog', 'Blog'], [null, p.title]]} title={p.title} intro={p.summary} />
-      <article className="wrap prose"><time>{formatDate(p.date)}</time>{p.body.map((t, i) => <p key={i}>{t}</p>)}</article>
+      <div className="wrap"><article className="doc-page prose"><time>{formatDate(p.date)}</time>{p.body.map((t, i) => <p key={i}>{t}</p>)}</article></div>
     </>
   );
 }

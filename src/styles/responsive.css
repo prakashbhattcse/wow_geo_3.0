@@ -4,6 +4,9 @@
   .foot{grid-template-columns:1fr 1fr}
   .game-list{grid-template-columns:1fr 1fr}
   .memory-grid{grid-template-columns:repeat(4,1fr)}
+  .about-layout{grid-template-columns:1fr;gap:32px}
+  .about-sidebar{position:static}
+  .about-stats{grid-template-columns:repeat(4,1fr)}
 }
 @media (max-width:800px){
   .menu{display:none}
@@ -18,6 +21,7 @@
   .cont-cards{grid-template-columns:1fr 1fr}
   .game-intro,.results,.quiz-play,.map-play,.typeall,.wordgrid{padding:18px}
   .q-card{padding:18px}
+  .contact-layout{grid-template-columns:1fr}
 }
 @media (max-width:560px){
   .nav-end .btn--primary{display:none}

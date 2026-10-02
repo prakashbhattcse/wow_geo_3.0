@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://wowgeography.com',
   author: 'Sandeep Bhatt',
   city: 'Bengaluru',
-  email: 'hello@wowgeography.com',
+  email: 'geographywow@gmail.com',
   youtube: 'https://www.youtube.com/@wowgeography',
   instagram: '',
   x: '',

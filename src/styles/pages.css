@@ -53,5 +53,121 @@
 .posts span{color:var(--muted)}
 .prose{max-width:70ch;font-size:1.07rem;line-height:1.75;padding-bottom:20px}
 .prose h2{font-size:1.4rem;margin:26px 0 6px}
+/* When prose lives inside a doc-page column, let doc-page control the width */
+.doc-page.prose,.doc-page .prose{max-width:none}
 .notfound{padding:80px 0}
 .notfound h1{font-size:clamp(2.2rem,5vw,3.4rem);margin:6px 0}
+
+/* ── Centered prose column (blog posts, privacy, terms) ──
+   Replaces the broken "wrap prose" pattern that left text
+   as a narrow strip hugging the left side on wide screens. */
+.doc-page{
+  max-width:760px;
+  margin-inline:auto;
+  padding-bottom:52px;
+}
+
+/* ── About page two-column layout ── */
+.about-layout{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:52px;
+  align-items:start;
+  padding-bottom:52px;
+}
+.about-prose{max-width:none}
+
+/* sidebar cards */
+.about-sidebar{display:grid;gap:18px;position:sticky;top:90px}
+.about-card{
+  background:#fff;
+  border:1.5px solid var(--rule);
+  border-radius:16px;
+  padding:22px 24px;
+  animation:slide-in .5s cubic-bezier(.16,1,.3,1) both;
+}
+.about-card:nth-child(2){animation-delay:.08s}
+.about-card:nth-child(3){animation-delay:.15s}
+.about-card:nth-child(4){animation-delay:.22s}
+@keyframes slide-in{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.about-card__title{font-family:var(--head);font-size:1.05rem;font-weight:800;margin:0 0 14px;color:var(--ink)}
+
+/* stat grid */
+.about-stats{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.about-stat{
+  display:flex;flex-direction:column;gap:2px;
+  background:var(--tint);border-radius:12px;padding:14px 12px;
+  transition:transform .2s ease;
+}
+.about-stat:hover{transform:translateY(-2px)}
+.about-stat__icon{font-size:1.5rem;line-height:1}
+.about-stat__value{font-family:var(--head);font-size:1.5rem;font-weight:800;color:var(--orange);line-height:1.1;margin-top:4px}
+.about-stat__label{font-size:.82rem;color:var(--muted);line-height:1.2}
+
+/* source list */
+.about-sources{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.about-source{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;line-height:1.4}
+.about-source__icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+
+/* YouTube card */
+.about-card--yt{
+  display:flex;gap:14px;align-items:center;
+  background:linear-gradient(135deg,#fff8f5,#fff);
+  border-color:#f9b9a0;
+  text-decoration:none;color:var(--ink);
+  transition:border-color .15s,transform .15s;
+}
+.about-card--yt:hover{border-color:var(--orange);transform:translateY(-2px)}
+.about-yt__icon{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--orange);color:#fff;
+  display:grid;place-items:center;font-size:1.1rem;flex-shrink:0;
+}
+.about-yt__text{display:flex;flex-direction:column;gap:2px}
+.about-yt__text strong{font-size:1rem;font-weight:700}
+.about-yt__text span{font-size:.85rem;color:var(--muted)}
+
+/* contact card */
+.about-card--contact p{margin:0 0 12px;font-size:.95rem;color:var(--muted)}
+
+/* ── Contact page ── */
+.contact-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-bottom:48px;
+}
+.contact-card{
+  display:flex;gap:18px;align-items:flex-start;
+  text-decoration:none;color:var(--ink);
+  border:1.5px solid var(--rule);border-radius:16px;
+  padding:26px 24px;
+  background:#fff;
+  transition:border-color .15s,transform .15s,box-shadow .15s;
+}
+.contact-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.contact-card__icon{
+  font-size:1.8rem;flex-shrink:0;
+  width:52px;height:52px;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--tint);
+}
+.contact-card--email{border-color:#f9b9a0}
+.contact-card--email:hover{border-color:var(--orange)}
+.contact-card--email .contact-card__icon{background:#fff3ed}
+.contact-card--yt{border-color:#ffccc8}
+.contact-card--yt:hover{border-color:#e53e3e}
+.contact-card--yt .contact-card__icon{background:#fff5f5}
+.contact-card__title{display:block;font-family:var(--head);font-size:1.15rem;font-weight:800;margin-bottom:2px}
+.contact-card__sub{display:block;font-size:.88rem;color:var(--muted);margin-bottom:8px}
+.contact-card__desc{margin:0;font-size:.95rem;color:var(--muted);line-height:1.5}
+.contact-note{max-width:700px;padding-bottom:52px}
+.contact-note h2{font-size:1.4rem;margin:0 0 14px;font-family:var(--head)}
+.contact-note ul{padding-left:20px;display:grid;gap:8px;margin:0 0 16px}
+.contact-note li{font-size:1rem;line-height:1.55}
+.contact-note p{color:var(--muted);font-size:.95rem;margin:0}
+
+
